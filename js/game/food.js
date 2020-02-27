@@ -1,12 +1,12 @@
-class Food{
-    constructor(position) {
-        this.position = position;
-    }
+class Food {
+  constructor(position) {
+    this.position = position;
+  }
 
-    show(size, color) {
-        noStroke();
-        fill(color);
+  show(size, color) {
+    noStroke();
+    fill(color);
 
-        rect(this.position.x * size, this.position.y * size, size, size);
-    }
+    rect(this.position.x * size, this.position.y * size, size, size);
+  }
 }

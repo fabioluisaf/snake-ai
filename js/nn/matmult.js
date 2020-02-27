@@ -1,25 +1,25 @@
 function matMult(m1, m2) {
-    if(m1[0].length !== m2.length) {
-        return;
+  if (m1[0].length !== m2.length) {
+    return;
+  }
+
+  let result = [];
+
+  for (let i = 0; i < m1.length; i++) {
+    result[i] = [];
+  }
+
+  for (let i = 0; i < result.length; i++) {
+    for (let j = 0; j < m2[i].length; j++) {
+      result[i][j] = 0;
+
+      for (let k = 0; k < m1[0].length; k++) {
+        result[i][j] += m1[i][k] * m2[k][j];
+      }
     }
+  }
 
-    let result = [];
-
-    for(let i = 0; i < m1.length; i++) {
-        result[i] = [];
-    }
-
-    for(let i = 0; i < result.length; i++) {
-        for(let j = 0; j < m2[i].length; j++) {
-            result[i][j] = 0;
-
-            for(let k = 0; k < m1[0].length; k++) {
-                result[i][j] += m1[i][k]*m2[k][j];
-            }
-        }
-    }
-
-    return result;
+  return result;
 }
 
 // /*
