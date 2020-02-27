@@ -52,7 +52,7 @@ class Snake {
     fill(color);
 
     for (let bodyPart of this.body) {
-      rect(bodyPart.x * size, bodyPart.y * size, size, size);
+      square(bodyPart.x * size, bodyPart.y * size, size);
     }
   }
 }
