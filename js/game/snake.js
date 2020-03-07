@@ -20,18 +20,12 @@ class Snake {
     let newHead;
     let head = this.body[0];
 
+    let moveDir = this.mvtIsPositive ? 1 : -1;
+
     if (this.mvtIsHorizontal) {
-      if (this.mvtIsPositive) {
-        newHead = createVector(head.x + 1, head.y);
-      } else {
-        newHead = createVector(head.x - 1, head.y);
-      }
+      newHead = createVector(head.x + moveDir, head.y);
     } else {
-      if (this.mvtIsPositive) {
-        newHead = createVector(head.x, head.y - 1);
-      } else {
-        newHead = createVector(head.x, head.y + 1);
-      }
+      newHead = createVector(head.x, head.y - moveDir);
     }
 
     this.body.unshift(newHead);

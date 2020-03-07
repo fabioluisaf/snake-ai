@@ -14,21 +14,6 @@ class Game {
     this.updateEntities();
   }
 
-  updateEntities() {
-    if (this.isThereFood()) {
-      if (
-        this.snake.body[0].x === this.food.position.x &&
-        this.snake.body[0].y === this.food.position.y
-      ) {
-        this.snake.eat();
-        this.food = this.generateFood();
-        this.score++;
-      }
-    } else {
-      this.food = this.generateFood();
-    }
-  }
-
   isThereFood() {
     return !(this.food === null);
   }
@@ -54,23 +39,22 @@ class Game {
     return false;
   }
 
-  nextFrame() {
-    this.applyInput();
-    this.snake.move();
-
-    this.checkSnakeCollision();
-    this.updateEntities();
+  updateEntities() {
+    if (this.isThereFood()) {
+      if (this.snake.body[0].x === this.food.position.x && this.snake.body[0].y === this.food.position.y) {
+        this.snake.eat();
+        this.food = this.generateFood();
+        this.score++;
+      }
+    } else {
+      this.food = this.generateFood();
+    }
   }
 
   checkSnakeCollision() {
     let head = this.snake.body[0];
 
-    if (
-      head.x >= this.sizeX ||
-      head.y >= this.sizeY ||
-      head.x < 0 ||
-      head.y < 0
-    ) {
+    if (head.x >= this.sizeX || head.y >= this.sizeY || head.x < 0 || head.y < 0) {
       this.ended = true;
       return;
     }
@@ -91,23 +75,20 @@ class Game {
 
   applyInput() {
     if (this.nextInput) {
-      switch (this.nextInput) {
-        case "up":
-          this.snake.setMoveDirection(false, true);
-          break;
-        case "down":
-          this.snake.setMoveDirection(false, false);
-          break;
-        case "left":
-          this.snake.setMoveDirection(true, false);
-          break;
-        case "right":
-          this.snake.setMoveDirection(true, true);
-          break;
-      }
+      const isHorizontal = this.nextInput === "right" || this.nextInput === "left";
+      const isPositive = this.nextInput === "right" || this.nextInput === "up";
 
+      this.snake.setMoveDirection(isHorizontal, isPositive);
       this.nextInput = null;
     }
+  }
+
+  nextFrame() {
+    this.applyInput();
+    this.snake.move();
+
+    this.checkSnakeCollision();
+    this.updateEntities();
   }
 
   show() {
